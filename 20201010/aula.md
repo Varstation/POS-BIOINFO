@@ -360,8 +360,8 @@ perl ~/bioinfo/app/annovar/table_annovar.pl resultados/NA12878_S1/NA12878_S1.avi
 -----------------------------------------------------------------
 NOTICE: Processing operation=g protocol=refGene
 
-NOTICE: Running with system command <annotate_variation.pl -geneanno -buildver hg19 -dbtype refGene -outfile resultados/003/003.refGene -exonsort resultados/003/003.avinput /bioinfo/app/annovar/humandb/>
-NOTICE: Output files were written to resultados/003/003.refGene.variant_function, resultados/003/003.refGene.exonic_variant_function
+NOTICE: Running with system command <annotate_variation.pl -geneanno -buildver hg19 -dbtype refGene -outfile resultados/NA12878_S1/NA12878_S1.refGene -exonsort resultados/NA12878_S1/NA12878_S1.avinput /bioinfo/app/annovar/humandb/>
+NOTICE: Output files were written to resultados/003/003.refGene.variant_function, resultados/NA12878_S1/NA12878_S1.refGene.exonic_variant_function
 NOTICE: Reading gene annotation from /bioinfo/app/annovar/humandb/hg19_refGene.txt ... Done with 63481 transcripts (including 15216 without coding sequence annotation) for 27720 unique genes
 NOTICE: Processing next batch with 2312 unique variants in 2312 input lines
 NOTICE: Reading FASTA sequences from /bioinfo/app/annovar/humandb/hg19_refGeneMrna.fa ... Done with 11 sequences
@@ -370,9 +370,9 @@ WARNING: A total of 402 sequences will be ignored due to lack of correct ORF ann
 NOTICE: Processing operation=f protocol=exac03
 NOTICE: Finished reading 8 column headers for '-dbtype exac03'
 
-NOTICE: Running system command <annotate_variation.pl -filter -dbtype exac03 -buildver hg19 -outfile resultados/003/003 resultados/003/003.avinput /bioinfo/app/annovar/humandb/ -otherinfo>
+NOTICE: Running system command <annotate_variation.pl -filter -dbtype exac03 -buildver hg19 -outfile resultados/NA12878_S1/NA12878_S1 resultados/NA12878_S1/NA12878_S1.avinput /bioinfo/app/annovar/humandb/ -otherinfo>
 NOTICE: the --dbtype exac03 is assumed to be in generic ANNOVAR database format
-NOTICE: Variants matching filtering criteria are written to resultados/003/003.hg19_exac03_dropped, other variants are written to resultados/003/003.hg19_exac03_filtered
+NOTICE: Variants matching filtering criteria are written to resultados/NA12878_S1/NA12878_S1.hg19_exac03_dropped, other variants are written to resultados/NA12878_S1/NA12878_S1.hg19_exac03_filtered
 NOTICE: Processing next batch with 2312 unique variants in 2312 input lines
 NOTICE: Database index loaded. Total number of bins is 749886 and the number of bins to be scanned is 70
 NOTICE: Scanning filter database /bioinfo/app/annovar/humandb/hg19_exac03.txt...Done
@@ -380,21 +380,21 @@ NOTICE: Scanning filter database /bioinfo/app/annovar/humandb/hg19_exac03.txt...
 NOTICE: Processing operation=f protocol=clinvar_20190114
 NOTICE: Finished reading 5 column headers for '-dbtype clinvar_20190114'
 
-NOTICE: Running system command <annotate_variation.pl -filter -dbtype clinvar_20190114 -buildver hg19 -outfile resultados/003/003 resultados/003/003.avinput /bioinfo/app/annovar/humandb/ -otherinfo>
+NOTICE: Running system command <annotate_variation.pl -filter -dbtype clinvar_20190114 -buildver hg19 -outfile resultados/NA12878_S1/NA12878_S1 resultados/NA12878_S1/NA12878_S1.avinput /bioinfo/app/annovar/humandb/ -otherinfo>
 NOTICE: the --dbtype clinvar_20190114 is assumed to be in generic ANNOVAR database format
-NOTICE: Variants matching filtering criteria are written to resultados/003/003.hg19_clinvar_20190114_dropped, other variants are written to resultados/003/003.hg19_clinvar_20190114_filtered
+NOTICE: Variants matching filtering criteria are written to resultados/NA12878_S1/NA12878_S1.hg19_clinvar_20190114_dropped, other variants are written to resultados/003/003.hg19_clinvar_20190114_filtered
 NOTICE: Processing next batch with 2312 unique variants in 2312 input lines
 NOTICE: Database index loaded. Total number of bins is 45640 and the number of bins to be scanned is 54
 NOTICE: Scanning filter database /bioinfo/app/annovar/humandb/hg19_clinvar_20190114.txt...Done
 -----------------------------------------------------------------
-NOTICE: Multianno output file is written to resultados/003/003.hg19_multianno.txt
+NOTICE: Multianno output file is written to resultados/NA12878_S1/NA12878_S1.hg19_multianno.txt
 ```
 
 **Arquivo .hg19_multiano.txt**
 
 ```bash
 # filtro com o comando grep para buscar apenas o cabeçalho e variantes do tipo exonic
-grep "^Chr\|exonic" resultados/003/003.hg19_multianno.txt  | head
+grep "^Chr\|exonic" resultados/NA12878_S1/NA12878_S1.hg19_multianno.txt  | head
 
 Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene	ExAC_ALL	ExAC_AFR	ExAC_AMR	ExAC_EAS	ExAC_FIN	ExAC_NFE	ExAC_OTH	ExAC_SAS	CLNALLELEID	CLNDN	CLNDISDB	CLNREVSTAT	CLNSIG
 chr13	32906565	32906565	-	A	exonic	BRCA2	.	frameshift insertion	BRCA2:NM_000059:exon10:c.951dupA:p.T317fs	8.321e-06	0	0	0.0001	0	0	0	0	67538	Hereditary_breast_and_ovarian_cancer_syndrome|Familial_cancer_of_breast|Hereditary_cancer-predisposing_syndrome|Breast-ovarian_cancer,_familial_2|not_provided	MeSH:D061325,MedGen:C0677776,Orphanet:ORPHA145|MedGen:C0006142,OMIM:114480,Orphanet:ORPHA227535,SNOMED_CT:254843006|MedGen:C0027672,SNOMED_CT:699346009|MedGen:C2675520,OMIM:612555|MedGen:CN517202	reviewed_by_expert_panel	Pathogenic
@@ -408,5 +408,5 @@ chr13	32911321	32911334	TAAAAAAGATTTGG	AAAAAAAGATTTTGGT	exonic	BRCA2	.	frameshif
 chr13	32911443	32911443	A	-	exonic	BRCA2	.	frameshift deletion	BRCA2:NM_000059:exon11:c.2951delA:p.E984fs	.	248944	Hereditary_cancer-predisposing_syndrome|Breast-ovarian_cancer,_familial_2	MedGen:C0027672,SNOMED_CT:699346009|MedGen:C2675520,OMIM:612555	reviewed_by_expert_panel	Pathogenic
 ```
 
-Utilize o commando `less -SN resultados/003/003.hg19_multianno.txt` para visualizar o arquivo de anotação. Para sair do comando less pressione a tecla `q`.
+Utilize o commando `less -SN resultados/NA12878_S1/NA12878_S1.hg19_multianno.txt` para visualizar o arquivo de anotação. Para sair do comando less pressione a tecla `q`.
 
