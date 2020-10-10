@@ -1,4 +1,4 @@
-# t12020 - Pipeline de Detecção de Variantes Germinativas
+# T1-2020 - Pipeline de Detecção de Variantes Germinativas
 
 # gitbash
 
@@ -92,11 +92,14 @@ https://doc-openbio.readthedocs.io/projects/annovar/en/latest/user-guide/downloa
 wget -c http://www.openbioinformatics.org/annovar/download/0wgxR2rIVP/annovar.latest.tar.gz
 tar -xzf annovar.latest.tar.gz
 
-# testar comando de ajuda
-perl ~/bioinfo/app/annovar/convert2annovar.pl -h
-
 # alternativamente copiar do diretório compartilhado /data
+cd ~/bioinfo/app/
 cp -r /data/bioinfo/app/annovar/ .
+
+cd ~/bioinfo/app/annovar/humandb/
+# baixar as bases: clinvar e exac03
+perl ~/bioinfo/app/annovar/annotate_variation.pl -buildver hg19 -downdb -webfrom annovar clinvar_20200316  ~/bioinfo/app/annovar/humandb/
+perl ~/bioinfo/app/annovar/annotate_variation.pl -buildver hg19 -downdb -webfrom annovar exac03 ~/bioinfo/app/annovar/humandb/
 ```
 
 
