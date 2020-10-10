@@ -354,61 +354,63 @@ ANNOVAR convert2annovar NA12878_S1 resultado
 Anotar as variantes chamadas utilizando algumas bases de dados públicas: Tempo (~5s).
 
 ```
-perl ~/bioinfo/app/annovar/table_annovar.pl resultados/NA12878_S1/NA12878_S1.avinput ~/bioinfo/app/annovar/humandb/ -buildver hg19 -out ~/bioinfo/resultados/NA12878_S1/NA12878_S1 -remove -protocol refGene,exac03,clinvar_20200316 -operation g,f,f -nastring .
+perl ~/bioinfo/app/annovar/table_annovar.pl ~/bioinfo/resultados/NA12878_S1/NA12878_S1.avinput ~/bioinfo/app/annovar/humandb/ -buildver hg19 -out ~/bioinfo/resultados/NA12878_S1/NA12878_S1 -remove -protocol refGene,exac03,clinvar_20200316 -operation g,f,f -nastring .
 ```
 
 ***output:***
 
 ```bash
+NOTICE: the --polish argument is set ON automatically (use --nopolish to change this behavior)
 -----------------------------------------------------------------
 NOTICE: Processing operation=g protocol=refGene
 
-NOTICE: Running with system command <annotate_variation.pl -geneanno -buildver hg19 -dbtype refGene -outfile resultados/NA12878_S1/NA12878_S1.refGene -exonsort resultados/NA12878_S1/NA12878_S1.avinput /bioinfo/app/annovar/humandb/>
-NOTICE: Output files were written to resultados/003/003.refGene.variant_function, resultados/NA12878_S1/NA12878_S1.refGene.exonic_variant_function
-NOTICE: Reading gene annotation from /bioinfo/app/annovar/humandb/hg19_refGene.txt ... Done with 63481 transcripts (including 15216 without coding sequence annotation) for 27720 unique genes
-NOTICE: Processing next batch with 2312 unique variants in 2312 input lines
-NOTICE: Reading FASTA sequences from /bioinfo/app/annovar/humandb/hg19_refGeneMrna.fa ... Done with 11 sequences
-WARNING: A total of 402 sequences will be ignored due to lack of correct ORF annotation
+NOTICE: Running with system command <annotate_variation.pl -geneanno -buildver hg19 -dbtype refGene -outfile /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.refGene -exonsort -nofirstcodondel /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.avinput /home/convidado/bioinfo/app/annovar/humandb/>
+NOTICE: Output files are written to /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.refGene.variant_function, /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.refGene.exonic_variant_function
+NOTICE: Reading gene annotation from /home/convidado/bioinfo/app/annovar/humandb/hg19_refGene.txt ... Done with 72567 transcripts (including 17617 without coding sequence annotation) for 28263 unique genes
+NOTICE: Processing next batch with 1914 unique variants in 1914 input lines
+NOTICE: Reading FASTA sequences from /home/convidado/bioinfo/app/annovar/humandb/hg19_refGeneMrna.fa ... Done with 35 sequences
+WARNING: A total of 448 sequences will be ignored due to lack of correct ORF annotation
+
+NOTICE: Running with system command <coding_change.pl  /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.refGene.exonic_variant_function.orig /home/convidado/bioinfo/app/annovar/humandb//hg19_refGene.txt /home/convidado/bioinfo/app/annovar/humandb//hg19_refGeneMrna.fa -alltranscript -out /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.refGene.fa -newevf /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.refGene.exonic_variant_function>
 -----------------------------------------------------------------
 NOTICE: Processing operation=f protocol=exac03
 NOTICE: Finished reading 8 column headers for '-dbtype exac03'
 
-NOTICE: Running system command <annotate_variation.pl -filter -dbtype exac03 -buildver hg19 -outfile resultados/NA12878_S1/NA12878_S1 resultados/NA12878_S1/NA12878_S1.avinput /bioinfo/app/annovar/humandb/ -otherinfo>
-NOTICE: the --dbtype exac03 is assumed to be in generic ANNOVAR database format
-NOTICE: Variants matching filtering criteria are written to resultados/NA12878_S1/NA12878_S1.hg19_exac03_dropped, other variants are written to resultados/NA12878_S1/NA12878_S1.hg19_exac03_filtered
-NOTICE: Processing next batch with 2312 unique variants in 2312 input lines
-NOTICE: Database index loaded. Total number of bins is 749886 and the number of bins to be scanned is 70
-NOTICE: Scanning filter database /bioinfo/app/annovar/humandb/hg19_exac03.txt...Done
+NOTICE: Running system command <annotate_variation.pl -filter -dbtype exac03 -buildver hg19 -outfile /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1 /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.avinput /home/convidado/bioinfo/app/annovar/humandb/ -otherinfo>
+NOTICE: Output file with variants matching filtering criteria is written to /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.hg19_exac03_dropped, and output file with other variants is written to /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.hg19_exac03_filtered
+NOTICE: Processing next batch with 1914 unique variants in 1914 input lines
+NOTICE: Database index loaded. Total number of bins is 749886 and the number of bins to be scanned is 26
+NOTICE: Scanning filter database /home/convidado/bioinfo/app/annovar/humandb/hg19_exac03.txt...Done
 -----------------------------------------------------------------
-NOTICE: Processing operation=f protocol=clinvar_20190114
-NOTICE: Finished reading 5 column headers for '-dbtype clinvar_20190114'
+NOTICE: Processing operation=f protocol=clinvar_20200316
+NOTICE: Finished reading 5 column headers for '-dbtype clinvar_20200316'
 
-NOTICE: Running system command <annotate_variation.pl -filter -dbtype clinvar_20190114 -buildver hg19 -outfile resultados/NA12878_S1/NA12878_S1 resultados/NA12878_S1/NA12878_S1.avinput /bioinfo/app/annovar/humandb/ -otherinfo>
-NOTICE: the --dbtype clinvar_20190114 is assumed to be in generic ANNOVAR database format
-NOTICE: Variants matching filtering criteria are written to resultados/NA12878_S1/NA12878_S1.hg19_clinvar_20190114_dropped, other variants are written to resultados/003/003.hg19_clinvar_20190114_filtered
-NOTICE: Processing next batch with 2312 unique variants in 2312 input lines
-NOTICE: Database index loaded. Total number of bins is 45640 and the number of bins to be scanned is 54
-NOTICE: Scanning filter database /bioinfo/app/annovar/humandb/hg19_clinvar_20190114.txt...Done
+NOTICE: Running system command <annotate_variation.pl -filter -dbtype clinvar_20200316 -buildver hg19 -outfile /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1 /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.avinput /home/convidado/bioinfo/app/annovar/humandb/ -otherinfo>
+NOTICE: the --dbtype clinvar_20200316 is assumed to be in generic ANNOVAR database format
+NOTICE: Output file with variants matching filtering criteria is written to /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.hg19_clinvar_20200316_dropped, and output file with other variants is written to /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.hg19_clinvar_20200316_filtered
+NOTICE: Processing next batch with 1914 unique variants in 1914 input lines
+NOTICE: Database index loaded. Total number of bins is 72394 and the number of bins to be scanned is 16
+NOTICE: Scanning filter database /home/convidado/bioinfo/app/annovar/humandb/hg19_clinvar_20200316.txt...Done
 -----------------------------------------------------------------
-NOTICE: Multianno output file is written to resultados/NA12878_S1/NA12878_S1.hg19_multianno.txt
+NOTICE: Multianno output file is written to /home/convidado/bioinfo/resultados/NA12878_S1/NA12878_S1.hg19_multianno.txt
 ```
 
 **Arquivo .hg19_multiano.txt**
 
 ```bash
 # filtro com o comando grep para buscar apenas o cabeçalho e variantes do tipo exonic
-grep "^Chr\|exonic" resultados/NA12878_S1/NA12878_S1.hg19_multianno.txt  | head
+grep "^Chr\|exonic" ~/bioinfo/resultados/NA12878_S1/NA12878_S1.hg19_multianno.txt  | head
 
-Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene	ExAC_ALL	ExAC_AFR	ExAC_AMR	ExAC_EAS	ExAC_FIN	ExAC_NFE	ExAC_OTH	ExAC_SAS	CLNALLELEID	CLNDN	CLNDISDB	CLNREVSTAT	CLNSIG
-chr13	32906565	32906565	-	A	exonic	BRCA2	.	frameshift insertion	BRCA2:NM_000059:exon10:c.951dupA:p.T317fs	8.321e-06	0	0	0.0001	0	0	0	0	67538	Hereditary_breast_and_ovarian_cancer_syndrome|Familial_cancer_of_breast|Hereditary_cancer-predisposing_syndrome|Breast-ovarian_cancer,_familial_2|not_provided	MeSH:D061325,MedGen:C0677776,Orphanet:ORPHA145|MedGen:C0006142,OMIM:114480,Orphanet:ORPHA227535,SNOMED_CT:254843006|MedGen:C0027672,SNOMED_CT:699346009|MedGen:C2675520,OMIM:612555|MedGen:CN517202	reviewed_by_expert_panel	Pathogenic
-chr13	32906729	32906729	A	C	exonic	BRCA2	.	nonsynonymous SNV	BRCA2:NM_000059:exon10:c.A1114C:p.N372H	0.2779	0.1249	0.3049	0.2728	0.2331	0.2818	0.2677	0.3558	24368	Hereditary_breast_and_ovarian_cancer_syndrome|Familial_cancer_of_breast|Fanconi_anemia|Hereditary_cancer-predisposing_syndrome|Ductal_breast_carcinoma|Breast-ovarian_cancer,_familial_2|not_specified|not_provided	MeSH:D061325,MedGen:C0677776,Orphanet:ORPHA145|MedGen:C0006142,OMIM:114480,Orphanet:ORPHA227535,SNOMED_CT:254843006|MedGen:C0015625,Orphanet:ORPHA84,SNOMED_CT:30575002|MedGen:C0027672,SNOMED_CT:699346009|MedGen:C1527349|MedGen:C2675520,OMIM:612555|MedGen:CN169374|MedGen:CN517202	reviewed_by_expert_panel	Benign
-chr13	32907215	32907215	-	A	exonic	BRCA2	.	frameshift insertion	BRCA2:NM_000059:exon10:c.1601dupA:p.E534fs	.	.
-chr13	32907303	32907303	G	-	exonic	BRCA2	.	frameshift deletion	BRCA2:NM_000059:exon10:c.1688delG:p.W563fs	.	234658	Hereditary_cancer-predisposing_syndrome|Breast-ovarian_cancer,_familial_2	MedGen:C0027672,SNOMED_CT:699346009|MedGen:C2675520,OMIM:612555	reviewed_by_expert_panel	Pathogenic
-chr13	32907421	32907421	A	-	exonic	BRCA2	.	frameshift deletion	BRCA2:NM_000059:exon10:c.1806delA:p.G602fs	.	46319	Hereditary_breast_and_ovarian_cancer_syndrome|Hereditary_cancer-predisposing_syndrome|Breast-ovarian_cancer,_familial_2|not_provided	MeSH:D061325,MedGen:C0677776,Orphanet:ORPHA145|MedGen:C0027672,SNOMED_CT:699346009|MedGen:C2675520,OMIM:612555|MedGen:CN517202	reviewed_by_expert_panel	Pathogenic
-chr13	32910430	32910430	C	T	exonic	BRCA2	.	synonymous SNV	BRCA2:NM_000059:exon11:c.C1938T:p.S646S	0.0009	0.0002	0.0008	0	0	0.0015	0	0	65898	Hereditary_breast_and_ovarian_cancer_syndrome|Familial_cancer_of_breast|Fanconi_anemia|Hereditary_cancer-predisposing_syndrome|Breast-ovarian_cancer,_familial_2|not_specified|not_provided	MeSH:D061325,MedGen:C0677776,Orphanet:ORPHA145|MedGen:C0006142,OMIM:114480,Orphanet:ORPHA227535,SNOMED_CT:254843006|MedGen:C0015625,Orphanet:ORPHA84,SNOMED_CT:30575002|MedGen:C0027672,SNOMED_CT:699346009|MedGen:C2675520,OMIM:612555|MedGen:CN169374|MedGen:CN517202	reviewed_by_expert_panel	Benign
-chr13	32910661	32910661	-	A	exonic	BRCA2	.	frameshift insertion	BRCA2:NM_000059:exon11:c.2170dupA:p.S723fs	.	46332	Neoplasm_of_the_breast|Hereditary_breast_and_ovarian_cancer_syndrome|Breast-ovarian_cancer,_familial_2	Human_Phenotype_Ontology:HP:0100013,MeSH:D001943,MedGen:C1458155,Orphanet:ORPHA180250,SNOMED_CT:126926005|MeSH:D061325,MedGen:C0677776,Orphanet:ORPHA145|MedGen:C2675520,OMIM:612555	reviewed_by_expert_panel	Pathogenic
-chr13	32911321	32911334	TAAAAAAGATTTGG	AAAAAAAGATTTTGGT	exonic	BRCA2	.	frameshift substitution	BRCA2:NM_000059:exon11:c.2829_2842AAAAAAAGATTTTGGT	.	.	.	.	.	.	.	.	.	.	.	.	.
-chr13	32911443	32911443	A	-	exonic	BRCA2	.	frameshift deletion	BRCA2:NM_000059:exon11:c.2951delA:p.E984fs	.	248944	Hereditary_cancer-predisposing_syndrome|Breast-ovarian_cancer,_familial_2	MedGen:C0027672,SNOMED_CT:699346009|MedGen:C2675520,OMIM:612555	reviewed_by_expert_panel	Pathogenic
+Chr     Start   End     Ref     Alt     Func.refGene    Gene.refGene    GeneDetail.refGene      ExonicFunc.refGene      AAChange.refGene      ExAC_ALL        ExAC_AFR        ExAC_AMR        ExAC_EAS        ExAC_FIN        ExAC_NFE        ExAC_OTH     ExAC_SAS CLNALLELEID     CLNDN   CLNDISDB        CLNREVSTAT      CLNSIG
+chr13   21893979        21893979        -       AATTTTTTGATGAAACAAGACGACTTTGT   ncRNA_exonic    GRK6P1  .       .       .    ..       .       .       .       .       .       .       .       .       .       .       .
+chr13   28601353        28601353        G       A       exonic  FLT3    .       synonymous SNV  FLT3:NM_004119:exon17:c.C2079T:p.Y693Y        .       .       .       .       .       .       .       .       .       .       .       .       .
+chr13   28601358        28601358        -       TGT     exonic  FLT3    .       nonframeshift insertion FLT3:NM_004119:exon17:c.2073_2074insACA:p.F691_E692insT       .       .       .       .       .       .       .       .       .       .       .    ..
+chr13   28601359        28601359        -       ATGACCAGGGTGGGCCCT      exonic  FLT3    .       nonframeshift insertion FLT3:NM_004119:exon17:c.2072_2073insAGGGCCCACCCTGGTCAT:p.F691delinsLGPTLVI    .       .       .       .       .       .       .    ..       .       .       .       .
+chr13   28601364        28601364        T       G       exonic  FLT3    .       nonsynonymous SNV       FLT3:NM_004119:exon17:c.A2068C:p.I690L        .       .       .       .       .       .       .       .       .       .       .       .       .
+chr13   28886227        28886227        A       G       exonic  FLT1    .       nonsynonymous SNV       FLT1:NM_002019:exon26:c.T3395C:p.I1132T       .       .       .       .       .       .       .       .       .       .       .       .       .
+chr13   28886231        28886231        -       GT      exonic  FLT1    .       frameshift insertion    FLT1:NM_002019:exon26:c.3390_3391insAC:p.Q1131Tfs*25  .       .       .       .       .       .       .       .       .       .       .       .    .
+chr13   28886232        28886232        -       CC      exonic  FLT1    .       stopgain        FLT1:NM_002019:exon26:c.3389_3390insGG:p.Y1130*       .       .       .       .       .       .       .       .       .       .       .       .       .
+chr13   28886235        28886235        -       AGAAGCAAAACA    exonic  FLT1    .       nonframeshift insertion FLT1:NM_002019:exon26:c.3386_3387insTGTTTTGCTTCT:p.I1129_Y1130insVLLL .       .       .       .       .       .       .       .       .    .
 ```
 
 Utilize o commando `less -SN resultados/NA12878_S1/NA12878_S1.hg19_multianno.txt` para visualizar o arquivo de anotação. Para sair do comando less pressione a tecla `q`.
