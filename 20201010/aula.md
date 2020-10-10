@@ -174,6 +174,25 @@ cd ~/bioinfo/reference
 bwa index hg19.fa 
 ```
 
+## Samtools: index reference 
+
+***NOTA:*** A etapa de index é feita apenas uma vez para cada arquivo de referência:
+
+```
+cd ~/bioinfo/reference
+
+samtools faidx hg19.fa 
+```
+
+## Gerar o dicionário das sequências FASTA
+```
+cd ~/bioinfo/reference
+
+picard-tools CreateSequenceDictionary \
+REFERENCE=hg19.fa \
+OUTPUT=hg19.dict
+```
+
 # FastQC: Relatório de Controle de Qualidade
 Gerar relatório de controle de qualidade com FastQC (Tempo ~10s):
 
