@@ -102,6 +102,7 @@ perl ~/bioinfo/app/annovar/annotate_variation.pl -buildver hg19 -downdb -webfrom
 perl ~/bioinfo/app/annovar/annotate_variation.pl -buildver hg19 -downdb -webfrom annovar exac03 ~/bioinfo/app/annovar/humandb/
 ```
 
+### Tarefa: Entrar no site do [Annovar](https://doc-openbio.readthedocs.io/projects/annovar/en/latest/user-guide/download/#additional-databases) e selecionar pelo menos 5 bancos de dados que ajudariam na análise de variantes germinativas.Justifique cada escolha e baixe os bancos de dados selcionados. 
 
 # Bioinformática: Pipelines e Comandos
 
