@@ -185,7 +185,7 @@ Gerar relatório de controle de qualidade com FastQC (Tempo ~10s):
 cd
 
 # rodar fastqc e salvar o resultado de cada amostra em seu diretorio
-fastqc -o ~/bioinfo/resultados/NA12878_S1/ ~/bioinfo/data/fastq/NA12878_S1/NA12878_S1_R1_001.fastq.gz ~/bioinfo/data/fastq/NA12878_S1_R2_001.fastq.gz
+fastqc -o ~/bioinfo/resultados/NA12878_S1/ ~/bioinfo/data/fastq/NA12878_S1_R1_001.fastq.gz ~/bioinfo/data/fastq/NA12878_S1_R2_001.fastq.gz
 ```
 
 FastQC NA12878_S1 resultado
@@ -202,7 +202,7 @@ Alinha sequencias de tamanho 70bp-1Mbp com o algoritmo BWA-MEM. Em resumo o algo
 cd
 
 # rodar bwa para alinhar as sequencias contra o genoma de referencia
-bwa mem -R '@RG\tID:003\tSM:003_NGSA\tLB:Agilent\tPL:Ion'  ~/bioinfo/reference/hg19.fa ~/bioinfo/data/fastq/NA12878_S1/NA12878_S1_R1_001.fastq.gz ~/bioinfo/data/fastq/NA12878_S1_R2_001.fastq.gz > ~/bioinfo/resultados/NA12878_S1/NA12878_S1.sam
+bwa mem -R '@RG\tID:NA12878_S1\tSM:NA12878_S1\tLB:Illumina\tPL:iSeq'  ~/bioinfo/reference/hg19.fa ~/bioinfo/data/fastq/NA12878_S1_R1_001.fastq.gz ~/bioinfo/data/fastq/NA12878_S1_R2_001.fastq.gz > ~/bioinfo/resultados/NA12878_S1/NA12878_S1.sam
 ```
 
 BWA-mem NA12878_S1 resultado
@@ -221,14 +221,14 @@ samtools fixmate ~/bioinfo/resultados/NA12878_S1/NA12878_S1.sam ~/bioinfo/result
 SAMTOOLS fixmate NA12878_S1 resultado
 
 
-Tempo: ~10min
+Tempo: ~1min
 
 ## samtools sort
 
 O ***samtools sort*** vai ordenar de nome para ordem de coordenadas. Tempo (5s):
 
 ```bash
-time samtools sort -O bam -o ~/bioinfo/resultados/NA12878_S1/NA12878_S1.bam -T /tmp/ ~/bioinfo/resultados/NA12878_S1/NA12878_S1.bam 
+samtools sort -O bam -o ~/bioinfo/resultados/NA12878_S1/NA12878_S1_sort.bam -T /tmp/ ~/bioinfo/resultados/NA12878_S1/NA12878_S1.bam 
 ```
 
 SAMTOOLS sort NA12878_S1 resultado
@@ -241,7 +241,7 @@ Tempo: ~1min
 O ***samtools index*** cria um index (.BAI) do arquivo binário (.BAM):
 
 ```bash
-samtools index ~/bioinfo/resultados/NA12878_S1/NA12878_S1.bam 
+samtools index ~/bioinfo/resultados/NA12878_S1/NA12878_S1_sort.bam 
 ```
 
 SAMTOOLS index NA12878_S1 resultado
@@ -249,11 +249,21 @@ SAMTOOLS index NA12878_S1 resultado
 
 Tempo: ~1min
 
+## HaplotypeCaller: chamador de variantes do GATK;
+O HaplotypeCaller é capaz de chamar SNPs e indels simultaneamente por meio de montagem de novo local de haplótipos em uma região ativa. Em outras palavras, sempre que o programa encontra uma região que mostra sinais de variação, ele descarta as informações de mapeamento existentes e remonta completamente as leituras naquela região. Isso permite que o HaplotypeCaller seja mais preciso ao chamar regiões que são tradicionalmente difíceis de chamar, por exemplo, quando contêm diferentes tipos de variantes próximas umas das outras. Isso também torna o HaplotypeCaller muito melhor em chamar indels do que chamadores baseados em posição como UnifiedGenotyper.
+```
+time gatk HaplotypeCaller -R ~/bioinfo/reference/hg19.fa \
+-I ~/bioinfo/resultados/NA12878_S1/NA12878_S1_sort.bam \
+-O ~/bioinfo/resultados/NA12878_S1/NA12878_S1.haplotypecaller.vcf
+```
+
+HaplotypeCaller call variant NA12878_S1 resultado
+
 # freebayes: chamador de variantes
 O FreeBayes é um detector variante genético Bayesiano projetado para encontrar pequenos polimorfismos, especificamente SNPs (polimorfismos de nucleotídeo único), indels (inserções e deleções), MNPs (polimorfismos de múltiplos nucleotídeos) e eventos complexos (eventos compostos de inserção e substituição) menores que os comprimento de um alinhamento de seqüenciamento de leitura curta. Link. Tempo (~6min):
 
 ```bash
-freebayes -f ~/bioinfo/reference/hg19.fa -F 0.01 -C 1 --pooled-continuous ~/bioinfo/resultados/003/003_sort.bam > ~/bioinfo/resultados/003/003.vcf
+freebayes -f ~/bioinfo/reference/hg19.fa -F 0.01 -C 1 --pooled-continuous ~/bioinfo/resultados/NA12878_S1/NA12878_S1_sort.bam > ~/bioinfo/resultados/NA12878_S1/NA12878_S1.freebayes.vcf
 ```
 
 ### Parâmetros
