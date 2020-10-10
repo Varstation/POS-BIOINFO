@@ -416,3 +416,6 @@ chr13   28886235        28886235        -       AGAAGCAAAACA    exonic  FLT1    
 
 Utilize o commando `less -SN resultados/NA12878_S1/NA12878_S1.hg19_multianno.txt` para visualizar o arquivo de anotação. Para sair do comando less pressione a tecla `q`.
 
+### Tarefa: Faça uma nova anotação adicionando os 5 bancos de dados selecionados no inicio da aula prática. 
+
+
