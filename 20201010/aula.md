@@ -130,12 +130,14 @@ Listamos os programas previamente instalados em nosso ambiente para executar o p
 * FastQC [Download](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 * freebayes [Download](https://github.com/ekg/freebayes)
 * samtools [Download](http://samtools.sourceforge.net/)
+* gatk [Download](https://github.com/broadinstitute/gatk/releases)
+* picard-tools [Download](https://broadinstitute.github.io/picard/)
 
 
 
 
 # Download das Referências
-Nesta estapa vamos utilizar dois cromossomos humanos (chr13 e chr17), nossos genes de interesse são: BRCA1 e BRCA2. [NCBI BRCA 1 and 2](https://www.ncbi.nlm.nih.gov/books/NBK470239/)
+Nesta estapa vamos utilizar dois cromossomos humanos.
 
 Acessar o site: [Sequence and Annotation Downloads](http://hgdownload.cse.ucsc.edu/downloads.html)
 
@@ -154,7 +156,7 @@ wget -c http://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/chr17.fa.gz
 zcat chr13.fa.gz chr17.fa.gz > hg19.fa
 
 # rm para deletar os arquivos chr13.fa e chr17.fa
-rm chr13.fa chr17.fa
+rm chr13.fa.gz chr17.fa.gz
 ```
 
 # BWA: index reference
@@ -183,36 +185,14 @@ Gerar relatório de controle de qualidade com FastQC (Tempo ~10s):
 cd
 
 # rodar fastqc e salvar o resultado de cada amostra em seu diretorio
-fastqc -o ~/bioinfo/resultados/003/ ~/bioinfo/data/fastq/003.fastq.gz 
+fastqc -o ~/bioinfo/resultados/NA12878_S1/ ~/bioinfo/data/fastq/NA12878_S1/NA12878_S1_R1_001.fastq.gz ~/bioinfo/data/fastq/NA12878_S1_R2_001.fastq.gz
 ```
 
-FastQC 003 resultado
+FastQC NA12878_S1 resultado
 
-### Tarefa 01: Repetir o processo para as amostras 017 e 019
 
 ~10 min
 
-
-#cutadapt: localizar e remover adaptadres
-O Cutadapt localiza e remove sequências de adaptadores, primers, caudas poly-A e outros tipos de sequência indesejada. Aqui vamos utilizar as funções para "trimar" sequências pequenas e maiores do que o esperado. (Tempo ~3s):
-
-```bash
-
- -m LEN[:LEN2], --minimum-length=LEN[:LEN2]
-                        Discard reads shorter than LEN. Default: 0
- -M LEN[:LEN2], --maximum-length=LEN[:LEN2]
-                        Discard reads longer than LEN. Default: no limit
- 
-# cd para voltar para a casa
-cd
-
-# cutadapt para remover sequencias de tamanho menores 100pb e maiores que 220
-cutadapt --minimum-length 100 --maximum-length 220 -q 15  -o ~/bioinfo/resultados/003/003.cutadapt.fastq  ~/bioinfo/data/fastq/003.fastq.gz
-```
-
-003.cutadapt.fastq resultado
-
-### Tarefa 02: Repetir o processo para as amostras 017 e 019
 
 # BWA-mem: maximal exact matches
 Alinha sequencias de tamanho 70bp-1Mbp com o algoritmo BWA-MEM. Em resumo o algoritmo trabalha com "alinhamento por sementes" com maximal exact matches (MEMs) e então estendendo sementes com o algoritmo Smith-Waterman (SW). Link. Tempo (~60s):
@@ -222,12 +202,11 @@ Alinha sequencias de tamanho 70bp-1Mbp com o algoritmo BWA-MEM. Em resumo o algo
 cd
 
 # rodar bwa para alinhar as sequencias contra o genoma de referencia
-bwa mem -R '@RG\tID:003\tSM:003_NGSA\tLB:Agilent\tPL:Ion'  ~/bioinfo/reference/hg19.fa ~/bioinfo/data/fastq/003.fastq.gz > ~/bioinfo/resultados/003/003.sam
+bwa mem -R '@RG\tID:003\tSM:003_NGSA\tLB:Agilent\tPL:Ion'  ~/bioinfo/reference/hg19.fa ~/bioinfo/data/fastq/NA12878_S1/NA12878_S1_R1_001.fastq.gz ~/bioinfo/data/fastq/NA12878_S1_R2_001.fastq.gz > ~/bioinfo/resultados/NA12878_S1/NA12878_S1.sam
 ```
 
-BWA-mem 003 resultado
+BWA-mem NA12878_S1 resultado
 
-### Tarefa 03: Repetir o processo para as amostras 017 e 019
 
 # samtools: fixmate, sort e index
 
@@ -236,12 +215,11 @@ BWA-mem 003 resultado
 Preencha coordenadas de posicionamento, posicione FLAGs relacionadas a partir a alinhamentos classificados por nome. Tempo (~5s):
 
 ```bash
-samtools fixmate ~/bioinfo/resultados/003/003.sam ~/bioinfo/resultados/003/003.bam
+samtools fixmate ~/bioinfo/resultados/NA12878_S1/NA12878_S1.sam ~/bioinfo/resultados/NA12878_S1/NA12878_S1.bam
 ```
 
-SAMTOOLS fixmate 003 resultado
+SAMTOOLS fixmate NA12878_S1 resultado
 
-### Tarefa 04: Repetir o processo para as amostras 017 e 019
 
 Tempo: ~10min
 
@@ -250,12 +228,11 @@ Tempo: ~10min
 O ***samtools sort*** vai ordenar de nome para ordem de coordenadas. Tempo (5s):
 
 ```bash
-time samtools sort -O bam -o ~/bioinfo/resultados/003/003_sort.bam -T /tmp/ ~/bioinfo/resultados/003/003.bam 
+time samtools sort -O bam -o ~/bioinfo/resultados/NA12878_S1/NA12878_S1.bam -T /tmp/ ~/bioinfo/resultados/NA12878_S1/NA12878_S1.bam 
 ```
 
-SAMTOOLS sort 003 resultado
+SAMTOOLS sort NA12878_S1 resultado
 
-### Tarefa 05: Repetir o processo para as amostras 017 e 019
 
 Tempo: ~1min
 
@@ -264,12 +241,11 @@ Tempo: ~1min
 O ***samtools index*** cria um index (.BAI) do arquivo binário (.BAM):
 
 ```bash
-samtools index ~/bioinfo/resultados/003/003_sort.bam 
+samtools index ~/bioinfo/resultados/NA12878_S1/NA12878_S1.bam 
 ```
 
-SAMTOOLS index 003 resultado
+SAMTOOLS index NA12878_S1 resultado
 
-### Tarefa 06: Repetir o processo para as amostras 017 e 019
 
 Tempo: ~1min
 
@@ -295,9 +271,8 @@ freebayes -f ~/bioinfo/reference/hg19.fa -F 0.01 -C 1 --pooled-continuous ~/bioi
 ```
 
 
-FREEBAYES call variant 003 resultado
+FREEBAYES call variant NA12878_S1 resultado
 
-### Tarefa 07: Repetir o processo para as amostras 017 e 019
 
 Tempo: ~10min
 
@@ -340,9 +315,8 @@ chr13	19650738	19650746	TCCTTCACG	CCCTGGACA	hom	16.0868	1
 chr13	19650770	19650770	G	A	hom	19.0318	1
 ```
  
-ANNOVAR convert2annovar 003 resultado
+ANNOVAR convert2annovar NA12878_S1 resultado
 
-### Tarefa 08: Repetir o processo para as amostras 017 e 019
 
 Anotar as variantes chamadas utilizando algumas bases de dados públicas: Tempo (~5s).
 
@@ -406,4 +380,3 @@ chr13	32911443	32911443	A	-	exonic	BRCA2	.	frameshift deletion	BRCA2:NM_000059:e
 
 Utilize o commando `less -SN resultados/003/003.hg19_multianno.txt` para visualizar o arquivo de anotação. Para sair do comando less pressione a tecla `q`.
 
-### Tarefa 09: Repetir o processo para as amostras 017 e 019
