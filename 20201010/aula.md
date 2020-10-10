@@ -414,7 +414,7 @@ chr13   28886232        28886232        -       CC      exonic  FLT1    .       
 chr13   28886235        28886235        -       AGAAGCAAAACA    exonic  FLT1    .       nonframeshift insertion FLT1:NM_002019:exon26:c.3386_3387insTGTTTTGCTTCT:p.I1129_Y1130insVLLL .       .       .       .       .       .       .       .       .    .
 ```
 
-Utilize o commando `less -SN resultados/NA12878_S1/NA12878_S1.hg19_multianno.txt` para visualizar o arquivo de anotação. Para sair do comando less pressione a tecla `q`.
+Utilize o commando `less -SN ~/bioinfo/resultados/NA12878_S1/NA12878_S1.hg19_multianno.txt` para visualizar o arquivo de anotação. Para sair do comando less pressione a tecla `q`.
 
 ### Tarefa: Faça uma nova anotação adicionando os 5 bancos de dados selecionados no inicio da aula prática. 
 
