@@ -184,7 +184,10 @@ cd ~/bioinfo/reference
 samtools faidx hg19.fa 
 ```
 
-## Gerar o dicionário das sequências FASTA
+## Picard: dicionário das sequências FASTA para ferramentas GATK
+
+***NOTA:*** A etapa de criação de disionário das sequências é feita apenas uma vez para cada arquivo de referência:
+
 ```
 cd ~/bioinfo/reference
 
