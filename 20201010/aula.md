@@ -313,38 +313,36 @@ ANNOVAR éma ferramenta eficiente para anotar funcionalmente variantes genética
 
 
 ```bash                   
-perl /bioinfo/app/annovar/convert2annovar.pl -format vcf4 ~/bioinfo/resultados/003/003.vcf > ~/bioinfo/resultados/003/003.avinput
+perl ~/bioinfo/app/annovar/convert2annovar.pl -format vcf4 ~/bioinfo/resultados/NA12878_S1/NA12878_S1.haplotypecaller.vcf > ~/bioinfo/resultados/NA12878_S1/NA12878_S1.avinput
 ``` 
 
 ***output: mensagens na tela***
  
 ```bash
------------------------------------------------------------------
-NOTICE: Processing operation=g protocol=refGene
-
-NOTICE: Running with system command <annotate_variation.pl -geneanno -buildver hg19 -dbtype refGene -outfile resultados/003/003.refGene -exonsort resultados/003/003.avinput /bioinfo/app/annovar/humandb/>
-NOTICE: Output files were written to resultados/003/003.refGene.variant_function, resultados/003/003.refGene.exonic_variant_function
-Error: cannot read from --queryfile (resultados/003/003.avinput): No such file or directory
-Error running system command: <annotate_variation.pl -geneanno -buildver hg19 -dbtype refGene -outfile resultados/003/003.refGene -exonsort resultados/003/003.avinput /bioinfo/app/annovar/humandb/>
+A12878_S1.haplotypecaller.vcf > ~/bioinfo/resultados/NA12878_S1/NA12878_S1.avinput
+NOTICE: Finished reading 1939 lines from VCF file
+NOTICE: A total of 1912 locus in VCF file passed QC threshold, representing 1694 SNPs (1118 transitions and 576 transversions) and 219 indels/substitutions
+NOTICE: Finished writing 1694 SNP genotypes (1118 transitions and 576 transversions) and 219 indels/substitutions for 1 sample
+WARNING: 1 invalid alternative alleles found in input file
 ```
 
 **Arquivo .avinput**
 
 
 ```bash
-# comando head para listar as 10 primeiras linhas do arquivo 003.avinput
-head resultados/003/003.avinput
+# comando head para listar as 10 primeiras linhas do arquivo NA12878_S1.avinput
+head ~/bioinfo/resultados/NA12878_S1/NA12878_S1.avinput
 
-chr13	19127992	19127992	G	A	hom	11.313	1
-chr13	19128097	19128097	A	G	hom	19.0318	1
-chr13	19128113	19128113	T	A	hom	15.1147	1
-chr13	19650636	19650636	T	CAA	hom	12.2464	1
-chr13	19650650	19650650	T	A	hom	2.53014	1
-chr13	19650671	19650671	G	C	hom	19.0318	1
-chr13	19650676	19650683	GCCTGAGC	ACACGACT	hom	11.313	1
-chr13	19650695	19650703	TGTATGGAT	CATACAGAG	hom	14.1494	1
-chr13	19650738	19650746	TCCTTCACG	CCCTGGACA	hom	16.0868	1
-chr13	19650770	19650770	G	A	hom	19.0318	1
+chr13   19088055        19088055        C       G       hom     37.32   2
+chr13   19088085        19088085        G       C       hom     78.32   2
+chr13   19088106        19088106        A       C       hom     78.32   2
+chr13   19088113        19088113        C       T       hom     78.32   2
+chr13   19088147        19088147        C       A       hom     78.32   2
+chr13   19088155        19088155        G       A       hom     78.32   2
+chr13   19088156        19088156        C       A       hom     78.32   2
+chr13   19088171        19088171        A       G       hom     78.32   2
+chr13   19106555        19106555        A       T       hom     661.06  15
+chr13   19106558        19106558        G       T       hom     661.06  15
 ```
  
 ANNOVAR convert2annovar NA12878_S1 resultado
@@ -353,7 +351,7 @@ ANNOVAR convert2annovar NA12878_S1 resultado
 Anotar as variantes chamadas utilizando algumas bases de dados públicas: Tempo (~5s).
 
 ```
-perl /bioinfo/app/annovar/table_annovar.pl resultados/003/003.avinput ~/bioinfo/app/annovar/humandb/ -buildver hg19 -out ~/bioinfo/resultados/003/003 -remove -protocol refGene,exac03,clinvar_20200316 -operation g,f,f -nastring .
+perl ~/bioinfo/app/annovar/table_annovar.pl resultados/NA12878_S1/NA12878_S1.avinput ~/bioinfo/app/annovar/humandb/ -buildver hg19 -out ~/bioinfo/resultados/NA12878_S1/NA12878_S1 -remove -protocol refGene,exac03,clinvar_20200316 -operation g,f,f -nastring .
 ```
 
 ***output:***
