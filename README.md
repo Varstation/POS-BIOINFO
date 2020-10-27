@@ -19,8 +19,7 @@ Sábado:
 Domingo:
 9:00h-11:00h
 11:20h-13:00h
-14:00h-16:00h
-16:20h-18:00h
+
 
 #### Calendário 2020 - Bioinformática Aplicada a Genômica Médica
 |  Dia  |     Mês    |  Unidade |
