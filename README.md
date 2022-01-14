@@ -1,4 +1,4 @@
-# T1-2020
+# POS-BIOINFO
 #### Bioinformática Aplicada a Genômica Médica
 #### Aulas mensais
 #### Sextas-Feiras das 13h às 23h, Sábados das 9h às 18h e Domingos das 9h às 13h
